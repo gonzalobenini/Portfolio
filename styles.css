@@ -1,0 +1,346 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300&family=Dosis:wght@200&family=Spectral+SC:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
+/* con el <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css"> como esta hecho en FCC no anda */ 
+
+.navbar-background ul{
+  background: linear-gradient(to right ,rgba(0,0,0,0),rgba(255, 255, 255, 0.9),rgba(0,0,0,0));
+  margin-top: 15px;
+  margin-left: 27%;
+  margin-right: 25%;
+  margin-bottom: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: flex;
+  
+  justify-content:space-around;
+  border-radius: 10px;
+  list-style-type: none;
+
+
+}
+
+.nb-item-selected{
+  border: 1px solid rgb(0, 0, 0) ;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 50px;
+  /*
+  background: black;
+  color:white;*/
+}
+
+.image-input{
+  border-radius: 10px;
+  border: none;
+  background-color: #130000b2;
+  color: rgba(240, 240, 240, 0.945);
+  outline: none;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.go-btn{
+  background-color: #ff5e00d8;
+  border-radius: 50%;
+
+}
+
+.timeContainer{
+  
+  position: absolute;
+  right: 8%;
+
+  margin-top: 45px;
+  transform: scale(1.5);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.timeClass{
+  font-family: 'Poiret One', cursive;
+  color: rgb(236, 236, 236);
+  
+}
+
+.flex-center-header{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#User1list{
+  background-color: rgba(0, 0, 0, 0.592);
+}
+
+.list-elements-center{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.btnDel {
+  background-color: DodgerBlue;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  padding: 0px 4px 1px;
+  font-size: 13px;
+  cursor: pointer;
+  margin: 2px 0px 3px 6px;
+  transform: scale(1); /* usar despues en la proxima version para no tocar tantas veces el codigo base del boton */
+}
+.round-top{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.round-bottom{
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+/* Darker background on mouse-over */
+.btnDel:hover {
+  background-color: RoyalBlue;
+}
+
+.btnDone,.btnUndone {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 15px;
+  transition: all 0.5s;
+  padding: 2px 0px 3px 0px;
+  cursor: pointer;
+  margin: 3px 6px 5px 5px;
+
+}
+
+.btnDone {
+  /* fijarme como hacer para que herede lo de btnDone asi saco las 4 lineas de arriba*/ 
+  background-color: #e63b3b;
+  padding: 0px 2px 5px 1px;
+}
+
+.btnUndone{
+  margin-left: 15px;
+  margin-right: 17px;
+}
+
+*{
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+  font-family: 'Open Sans', sans-serif;
+}
+
+.degPicker{
+  padding: 25px 25px 25px 25px;
+  background:grey;
+  border-radius:50px;
+}
+
+body{
+  background: linear-gradient(to right,	#2b6684,	#213035);
+}
+
+html { /* para arreglar la configuracion de que se rompe cuando se elije degrade ene l menu de configuracion, ver como arreglarlo*/
+  min-height: 100%;
+}
+
+.bd{
+  background-attachment: fixed;
+  background-position: center;
+
+  /*  background-size:100% 100%;   esto remplazaria todo lo que esta abajo   */
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+}
+
+#circle{
+  padding : 15px 12px 15px 12px;
+  background: 	rgba(0, 122, 121,.3);
+  border-radius: 50%;
+}
+
+.flex-column{
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+#name{
+  /* posicionamiento temporal se va a cambiar cuando este flexbox y grid */
+  margin : 0;
+  height: 26px;
+  /* parte oficial */
+  font-family: Spectral SC;
+}
+
+#name2{
+  margin: 0;
+  font-family: cairo;
+}
+
+#name:hover{
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  animation-name: bigname;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes bigname {
+  75%{
+    transform: scale(1.05);
+    text-decoration-color: transparent;
+    margin-bottom: 1px;
+  }
+  100%{
+    transform: scale(1.04);
+    margin-bottom: 3px;
+    text-decoration-color: rgba(93, 241, 184, 0.287);
+  } 
+}
+
+#slogan{
+  /* posicionamiento temporal se va a cambiar cuando este flexbox y grid */
+  /* parte oficial */
+  margin: 2px;
+  font-family: Dosis;
+  color:white;
+  opacity: .85;
+  font-style:italic;
+}
+
+
+#menuGoOn{
+  background-color: transparent; /* lo pongo para que no me marque error*/  
+}
+
+#menuGoOff{
+  opacity: 50%;
+}
+
+main{
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+#tdUser1{
+  width: 30%;
+}
+
+/*.usertodo{
+  text-align: center;
+}*/
+
+footer{
+  /* background-color: cyan; */
+    position: absolute;
+
+    bottom: 25px;
+    width: 99%;
+}
+
+#footer-text{
+  display: flex;
+  justify-content: center;
+  margin: 25px 0px 0px 0px;
+  color : white;
+  border:none;
+  border-radius: 50%;
+}
+
+.menuOff     
+{    
+  display: none;    
+}
+
+.row-center{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+input[type="color" i] {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+
+  margin-top: 4px;
+
+  width: 20px;
+  height: 23px;
+}
+
+.menuOn    
+{
+  position:absolute; /* posicionamiento arriba y al a izq del todo*/
+  top: 0;
+  left: 0;
+  margin-top: 0px;
+
+  background-color: #e63b3b; /**/
+  width: 350px;
+  height: 100%;
+
+  display: flex;    /*caracteristicas de distribucion internas internas*/ 
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  font-size: 150%;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+  
+}  
+
+.todo-done{
+  text-decoration: line-through;
+  color: rgba(255, 255, 255, 0.6);
+
+
+
+  background-color: transparent;
+  margin-right: 10px;
+}
+
+.todo-undone{
+  background-color: transparent;
+  margin-right: 10px;
+}
+
+.todolist{
+  display: flex;
+  flex-direction: row;
+}
+
+.tdUserName{
+  font-size: 130%;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.392);
+  color: rgba(255, 255, 255, 0.80);
+}
+
+#taskInput{
+  height: 140%;
+  width: 85%;
+}
+
+/*#taskBtn{  
+}*/
