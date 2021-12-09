@@ -11,22 +11,18 @@
     
     var bodyElem = document.getElementsByTagName("body")[0];
 
-
     const setBgColor = (value) => {
-        //no imprime el value por eso se hace con el document. en vez de el value, arreglar
         bodyElem.setAttribute("style","background: " + document.getElementById("bgColorInput").value + ";");
     };
-
-    // seguro sea necesario meterlo en el DOMready event para que funcione
 
     let gradientDegre = 90; // declaracion mas una configuracion inicial
 
     document.getElementById("degSelect").addEventListener("mousedown", event => {
-        const retDeg = () => {
+        const retDeg = () => { // la idea es que el selector de degrade funcione como una rueda de seleccion.
             let x = event.pageX - $('#degSelect').offset().left - 25 ; //  el menos 25 es por el padding tanto horizontal como vertical que tiene el div
             let y = event.pageY - $('#degSelect').offset().top - 25; //  con esta resta los valores son [-25,25] en vez de [0,40]
-            x = -x; // sino se ve invertido el degrade, removerlo y probar, se rompe
-            y = -y; // invierte el valor asi mas arriba da positivo y mas abajo negativo en vez de al revez
+            x = -x;
+            y = -y;
             let deg = Math.atan2(y,x) * 180 / Math.PI;
             deg = (deg <= 0 ) ? deg + 360 : deg;
             document.getElementById("degSelect").setAttribute("style",'background: linear-gradient('+(deg-90)+'deg,'+document.getElementById("gradient1").value+','+ document.getElementById("gradient2").value +');');
@@ -40,7 +36,6 @@
     const setBgGradient = () => {
         gradientDegre = Math.floor(gradientDegre);
         bodyElem.setAttribute("style",'background: linear-gradient('+(gradientDegre-90)+'deg,'+document.getElementById("gradient1").value+','+ document.getElementById("gradient2").value +');');
-        // se agrego un tag html{} para arreglarlo, buscar otra idea.
     };
 
 
@@ -70,10 +65,10 @@
     
     const updateTimeSpent = () => {
         timeSpent.s++;
-        if (timeSpent.s == 60){ // paso minuto
+        if (timeSpent.s == 60){ // paso un minuto
             timeSpent.s = 0;
             timeSpent.m++;
-            if (timeSpent.m == 60){ // paso hora
+            if (timeSpent.m == 60){ // paso una hora
                 timeSpent.m = 0;
                 timeSpent.h++;
             }
@@ -102,13 +97,13 @@
 
     { // todo component
 
-        // needed variables
-        var UserTasks; // variable para el manejo de todo el listado como arreglo de objetos
-        var globalCounter = 0; // variable escencial para el borrado de elementos del todo
+        // variables necesarias
+        var UserTasks; // variable para el manejo de todo el listado como arreglo de objetos.
+        var globalCounter = 0; // variable escencial para el borrado de elementos del todo.
 
-        // carga desde la memoria
+        // carga desde la memoria.
         function inicializarTodo (){
-            // carga container en el elemento main
+            // carga container en el elemento main.
             document.getElementsByTagName("main")[0].innerHTML = 
             `<div id="tdUser1">
                 <div class="tdUserName round-top"><input id="userName" class="tdUserName" type="text"placeholder="username" style="outline: none;text-align: center;; background-color: transparent; border: none;"></div>  
@@ -120,30 +115,31 @@
             </div>`;
 
 
-            if (localStorage.getItem("user1") === null) {   // crea un archivo todo en localStorage
-                UserTasks = [ {name: "gonzalo"} ];
-                UserTasks.push({TaskIs:"el valor abajo del reloj marca el tiempo que pasaste en la pagina" , state:false });
-                UserTasks.push({TaskIs:"clickeando en el logo de 'Gn-Bn' abris el menu de configuraciones" , state:false });
+            if (localStorage.getItem("user1") === null) {   // crea un archivo todo en localStorage.
+                UserTasks = [ '' ]; // el primer elemento de la lista de tareas es el nombre de esta misma lista, por conveniencia al indexar las tareas y por convencion.
+                UserTasks.push({TaskIs:"El valor por debajo del reloj marca el tiempo que pasaste en la pagina" , state:false });
+                UserTasks.push({TaskIs:"Clickeando en el logo de 'Gn-Bn' abris el menu de configuraciones" , state:false });
                 localStorage.setItem("user1",JSON.stringify(UserTasks));
             }
             else {   // recupera archivo todo en localStorage
                 UserTasks = localStorage.getItem("user1");
                 UserTasks = JSON.parse(UserTasks);
             }
-
-            document.getElementById("userName").value = UserTasks[0]; // carga el nombre de usuario o id del todo actual
-            for (i = 1; i < UserTasks.length; i++){ //carga las tareas de la memoria
+            
+            for (i = 1; i < UserTasks.length; i++){ //carga las tareas de la memoria local.
                 addToList(UserTasks[i],i);
             }
             
 
             // carga eventos
-            document.getElementById("taskInput").addEventListener("keydown", event =>{ // estaba anidado adentro de un focus event con el mismo get document y al de este evento se le removia
+            document.getElementById("taskInput").addEventListener("keydown", event =>{
                 if (event.code == "Enter" || event.code == "NumpadEnter")
                 createAndInsertTask();
-            });
+            });            
     
             document.getElementById("userName").addEventListener("keydown", event => saveUserNameInput());
+
+            document.getElementById("userName").value = UserTasks[0]; // carga el nombre de usuario o id del todo actual.
         }
 
         function createAndInsertTask(){
@@ -214,7 +210,7 @@
             setTimeout(() => {
                 UserTasks[0] = document.getElementById("userName").value;
                 localStorage.setItem("user1",JSON.stringify(UserTasks));
-            }, 5); // se le metio un timeout por que sino se rompe y no funciona y cuando lo meto en el eventhandler que lo trigerea q saveusername se llame con retraso no fnciona
+            }, 5); // se le agrego un timeout porque sino deja de funcionar adecuadamente cuando el eventhandler que lo trigerea vuelve a invocar a la funcion saveUserName.
         }  
     }
 
@@ -222,29 +218,25 @@
 // "Main"
 
 
-// variablle global principal
-let currentState = "todo-nb"; // variable que define la applicacion que se esta usando actualmente, las aplicaciones aparecen en el navbar, todolist por default deberia estar definida con bar
+// variable global principal
+let currentState = "todo-nb"; // variable que define la applicacion que se esta usando actualmente, las aplicaciones aparecen en el navbar, todolist por default deberia estar definida con bar.
 let timeSpent;
 document.addEventListener('DOMContentLoaded', event => {
     // carga inicial de memoria local
-    if (localStorage.getItem("timeSpent")===null){ // tiempo de usuario en la pagina
+    if (localStorage.getItem("timeSpent")===null){ // tiempo de usuario en la pagina, proximamente se agregara la opcion para desactivarlo.
         timeSpent = {h:00,m:00,s:00};
     } else{
         timeSpent = JSON.parse(localStorage.getItem("timeSpent"));
     }
 
-    // cargar configuracion del usuario
-
-
-    // cargar ultima tarea hecha
-
+    // cargar configuracion del usuario (se guardara la ultima configuracion establecida).
+    // proximamente...
+    
+    // cargar ultima aplicacion usada (proximas aplicaciones son: juego de la serpiente, descargar video y/o audio de un enlace de youtube, duracion de una playlist, algoritmo de pathfinding).
+    // proximamente...
     
     // inicializacion de funcionalidades
     getLocalTime();
     updateTimeSpent();
     inicializarTodo();
-    gApi();
 });
-
-    function gApi() {
-    }
