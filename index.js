@@ -119,6 +119,7 @@
                 UserTasks = [ '' ]; // el primer elemento de la lista de tareas es el nombre de esta misma lista, por conveniencia al indexar las tareas y por convencion.
                 UserTasks.push({TaskIs:"El valor por debajo del reloj marca el tiempo que pasaste en la pagina" , state:false });
                 UserTasks.push({TaskIs:"Clickeando en el logo de 'Gn-Bn' abris el menu de configuraciones" , state:false });
+                UserTasks.push({TaskIs:"Los botones de chat global y youtube interactions estan todavia en desarrollo" , state:false });
                 localStorage.setItem("user1",JSON.stringify(UserTasks));
             }
             else {   // recupera archivo todo en localStorage
