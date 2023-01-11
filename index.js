@@ -83,14 +83,29 @@
     // nav bar component
     function changeState(id){ //declarado abajo del todo en la inicializacion (en dom ready event)
         if (id != currentState){
-            replaceState(id);
+            setState(id);
         }
     };
 
-    const replaceState = id => {
+    const setState = id => {
         document.getElementById(currentState).setAttribute("class","");
         document.getElementById(id).setAttribute("class","nb-item-selected");
         currentState=id;
+
+        if (currentState == 'ce-nb'){ // debido a la poca complejidad no se le asigna una funcion
+            const body = document.getElementById('mainId');
+            body.innerHTML = `
+            <div>
+            <div id="ce-link"><a href="https://chrome.google.com/webstore/detail/i-read-your-language/epdmimclagonophgbhdldggcdgidknoo">enlace a la extension</a></div>
+            <div><img src="ext.jpg" alt="extension description" class="ce-img"></div>
+            </div>
+            `;
+        }
+        else if (currentState == 'todo-nb') inicializarTodo();
+        else {
+            const body = document.getElementById('mainId');
+            body.innerHTML = ''
+        };
     }
 
 
@@ -108,7 +123,7 @@
             `<div id="tdUser1">
                 <div class="tdUserName round-top"><input id="userName" class="tdUserName" type="text"placeholder="username" style="outline: none;text-align: center;; background-color: transparent; border: none;"></div>  
                     <div id="tdUser1-input" class="tdUserName" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0.392)65%, rgba(0, 0, 0, 0.592)100%);display: flex; justify-content: space-evenly;">
-                        <input autocomplete="off" class="round-bottom round-top" style="background-color: rgba(121, 92, 134, 0.315); border: none; height: 35px; color: white;margin-bottom: 10px;margin-top: 2px/*sacar*/;" type="text" name="newTask" id="taskInput" placeholder="metele las tareas de tu sueños">
+                        <input autocomplete="off" class="round-bottom round-top" style="background-color: rgba(121, 92, 134, 0.315); border: none; height: 35px; color: white;margin-bottom: 10px;margin-top: 2px/*sacar*/;" type="text" name="newTask" id="taskInput" placeholder="Ingrese tareas aqui">
                         <button id="taskBtn" style="padding: 0px 0px 2px 0px;margin-bottom: 10px; width: 50px;" class="btnDone" onclick="createAndInsertTask();">add</button>
                     </div>             
                     <div id="User1list" class="round-bottom"></div>
@@ -119,7 +134,8 @@
                 UserTasks = [ '' ]; // el primer elemento de la lista de tareas es el nombre de esta misma lista, por conveniencia al indexar las tareas y por convencion.
                 UserTasks.push({TaskIs:"El valor por debajo del reloj marca el tiempo que pasaste en la pagina" , state:false });
                 UserTasks.push({TaskIs:"Clickeando en el logo de 'Gn-Bn' abris el menu de configuraciones" , state:false });
-                UserTasks.push({TaskIs:"Los botones de chat global y youtube interactions estan todavia en desarrollo" , state:false });
+                UserTasks.push({TaskIs:"link al repositorio: https://github.com/gonzalobenini" , state:false });
+                UserTasks.push({TaskIs:"Livechat con backend realizado en Nodejs y Express (sin host actualmente). Extension de chrome con back-end en Django." , state:false });
                 localStorage.setItem("user1",JSON.stringify(UserTasks));
             }
             else {   // recupera archivo todo en localStorage
@@ -239,5 +255,5 @@ document.addEventListener('DOMContentLoaded', event => {
     // inicializacion de funcionalidades
     getLocalTime();
     updateTimeSpent();
-    inicializarTodo();
+    setState(currentState);
 });

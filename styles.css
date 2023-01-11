@@ -151,6 +151,19 @@ html { /* para arreglar la configuracion de que se rompe cuando se elije degrade
   min-height: 100%;
 }
 
+.ce-img{
+  width:1024px;
+  height:580px;
+  scale: 95%;
+}
+
+#ce-link {
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
 .bd{
   background-attachment: fixed;
   background-position: center;
@@ -239,6 +252,7 @@ main{
   color: white;
   display: flex;
   justify-content: center;
+  margin-top: 1.5%
 }
 
 #tdUser1{
